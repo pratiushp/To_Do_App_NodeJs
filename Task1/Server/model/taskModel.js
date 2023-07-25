@@ -22,6 +22,11 @@ const taskSchema = new mongoose.Schema(
       required: true,
       ref: "users",
     },
+
+    submission_date: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );

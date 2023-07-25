@@ -10,6 +10,8 @@ import {
   loginController,
   registerController,
   resetPasswordController,
+  searchController,
+  sortController,
   updateUser,
 } from "../controllers/authController.js";
 
@@ -53,8 +55,13 @@ router.post("/forgot-password", forgotPasswordController);
 // router.get("/reset-password/:resetToken", resetTokenController);
 
 //Post new Password
-router.post("/reset-password/:token", resetPasswordController);
+router.post("/reset-password", resetPasswordController);
 
-//
+//Search Route
+router.get("/search/:username", searchController);
+
+//Sort Route
+router.get("/sort", sortController);
+
 // router.post("/test" , test )
 export default router;

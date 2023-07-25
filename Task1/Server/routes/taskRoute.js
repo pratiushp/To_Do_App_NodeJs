@@ -3,8 +3,10 @@ import {
   addTaskController,
   deleteTaskController,
   editTaskController,
+  filterDateController,
   getAllTasksController,
   getSingleTaskController,
+  getTasksPageController,
 } from "../controllers/taskController.js";
 import {
   isAdmin,
@@ -23,10 +25,11 @@ router.post("/add-task", requireSignIn, isAdmin, addTaskController);
 router.get(
   "/getall-task",
   requireSignIn,
-  isEmployee,
-  isSupervisior,
+
   getAllTasksController
 );
+
+router.get("/get-task-page", requireSignIn, isAdmin, getTasksPageController);
 
 //Get Single Task
 router.get(
@@ -42,5 +45,10 @@ router.put("/edit-task/:id", requireSignIn, isAdmin, editTaskController);
 
 // Delete a task by its ID
 router.delete("/delete-task/:id", requireSignIn, isAdmin, deleteTaskController);
+
+
+//Filter Task Date
+router.get("/filter-task", requireSignIn, isAdmin, filterDateController);
+
 
 export default router;

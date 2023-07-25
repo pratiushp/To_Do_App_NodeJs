@@ -282,8 +282,8 @@ export const forgotPasswordController = async (req, res) => {
 };
 
 export const resetPasswordController = async (req, res) => {
-  const { newPassword } = req.body;
-  const resetToken = req.params.token;
+  const { newPassword, resetToken } = req.body;
+  // const resetToken = req.params.token;?
 
   try {
     // Verify the reset token
@@ -310,10 +310,40 @@ export const resetPasswordController = async (req, res) => {
   }
 };
 
-// export const test = async (req, res) => {
-//   try {
-//     console.log("Happy Prajwal");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const searchController = async (req, res) => {
+  const { username } = req.params;
+  try {
+    const results = await userModel.find({
+      $or: [
+        {
+          name: { $regex: username, $options: "i" },
+        },
+      ],
+    });
+
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Search Name",
+      error,
+    });
+  }
+};
+
+//Sort Controller
+export const sortController = async (req, res) => {
+  try {
+    const results = await userModel.find().sort({ name: 1 }); // Sort by 'name' in ascending order
+
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Search Name",
+      error,
+    });
+  }
+};
